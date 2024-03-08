@@ -15,5 +15,13 @@ class Repository(abstract.IRepository):
     async def create_or_update_client(self, client) -> None:
         return await self.repository.create_or_update_client(client=client)
 
+    async def get_categories(self):
+        return await self.repository.get_categories()
+
+    async def get_products(self, category_id):
+        return await self.repository.get_products(
+            category_id=category_id
+        )
+
 
 repository = Repository(AlchemyRepository())

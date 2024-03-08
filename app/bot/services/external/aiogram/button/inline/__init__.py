@@ -1,4 +1,4 @@
 """
 init inline button utilities
 """
-from .create import genmarkup # noqa
+from .create import * # noqa

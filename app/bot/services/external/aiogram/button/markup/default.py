@@ -40,6 +40,9 @@ class DefaultConstructor:
         one_time_keyboard: bool = False,
         is_persistent: bool = True,
     ) -> ReplyKeyboardMarkup:
+        """
+        button creator
+        """
         btns: list[KeyboardButton] = []
 
         for a in actions:

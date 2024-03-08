@@ -17,8 +17,19 @@ class AppController(IAppController):
     ):
         self.repository = repository
 
-    async def create_or_update_client(self, client: models.Client):
+    async def create_or_update_client(
+        self,
+        client: models.Client
+    ) -> models.Client | None:
         await self.repository.create_or_update_client(client)
+
+    async def get_categories(self) -> list[models.Category]:
+        return await self.repository.get_categories()
+
+    async def get_products(self, category_id) -> list[models.Product]:
+        return await self.repository.get_products(
+            category_id=category_id
+        )
 
 
 controller = AppController(

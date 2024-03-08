@@ -1,5 +1,5 @@
 """
-init sql alchemy models
+init sql alchemy client model
 """
 from sqlalchemy import Column, Integer, String
 

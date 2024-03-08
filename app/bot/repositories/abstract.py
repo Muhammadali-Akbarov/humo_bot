@@ -19,3 +19,17 @@ class IRepository(abc.ABC):
         create or update user
         """
         raise NotImplementedError("create_or_update_user not implemented!")
+
+    @abc.abstractmethod
+    async def get_categories(self):
+        """
+        get all categories
+        """
+        raise NotImplementedError("get_categories not implemented!")
+
+    @abc.abstractmethod
+    async def get_products(self, category_id):
+        """
+        get all products
+        """
+        raise NotImplementedError("get_products not implemented!")

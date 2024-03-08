@@ -4,6 +4,8 @@ inline button creator
 from aiogram.types import InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
+from app.bot.services.external.aiogram.button.inline.default import constructor # noqa
+
 
 def genmarkup(keyboard_data: dict):
     """
@@ -26,3 +28,31 @@ def genmarkup(keyboard_data: dict):
         builder.add(button)
 
     return builder.as_markup()
+
+
+def generate_inline(actions: list[dict], schema):
+    """
+    generate inline keyboard buttons
+
+    constructor.create_kb(
+        actions=[
+            {
+                "text": "Button 1",
+                "callback_data": "button1_callback",
+            },
+            {
+                "text": "Button 2",
+                "callback_data": "button2_callback",
+            },
+            {
+                "text": "Button 3",
+                "callback_data": "button3_callback",
+            },
+        ],
+        schema=[1, 1, 1]
+    )
+    """
+    return constructor.create_kb(
+        actions=actions,
+        schema=schema
+    )

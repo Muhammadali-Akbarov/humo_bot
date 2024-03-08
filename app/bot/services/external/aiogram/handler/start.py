@@ -1,18 +1,18 @@
 """
 init aiogram
 """
+from aiogram import F
 from aiogram.types import Message
-from aiogram.filters import CommandStart
 
 from app.bot import models
 from app.bot.controllers import controller
 
-from app.bot.services.external.aiogram import dispatcher as dp
 from app.bot.services.external.aiogram.button import markup
+from app.bot.services.external.aiogram import dispatcher as dp
 
 
-@dp.message(CommandStart())
-async def echo_handler(message: Message) -> None:
+@dp.message((F.text == "/start") | (F.text == "🔙 Ortga"))
+async def start(message: Message) -> None:
     """
     Handler will forward receive a message back to the sender
     """
@@ -26,8 +26,8 @@ async def echo_handler(message: Message) -> None:
         client=client
     )
 
-    btns = ["🛍 Maxsulotlar", "📍 Manzil", "📩 Bog'lanish"]
-    schema = [2, 1]
+    btns = ["🛍 Maxsulotlar"]
+    schema = [1]
 
     buttons = markup.genmarkup(btns, schema)
 

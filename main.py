@@ -7,7 +7,7 @@ import fastapi
 from app.bot.presentation import router
 from app.bot.settings.internal.conf import port
 from app.bot.services.external.aiogram import bot
-from app.bot.services.external.alchemy import model
+from app.bot.services.external.alchemy import models
 from app.bot.services.external.alchemy import engine
 
 
@@ -20,7 +20,7 @@ async def startup_event():
     startup events.
     """
     # run migrations
-    model.Base.metadata.create_all(bind=engine)
+    models.Base.metadata.create_all(bind=engine)
 
     # set webhook
     await bot.set_webhook(
