@@ -4,6 +4,7 @@ category handler
 from aiogram.types import CallbackQuery
 
 from app.bot.controllers import controller
+from app.bot.services.external.aiogram import shortcut
 from app.bot.services.external.aiogram import dispatcher as dp
 
 
@@ -12,17 +13,17 @@ async def category(cb: CallbackQuery) -> None:
     """
     handler will forward receive a message back to the sender
     """
-    chat_id = cb.message.chat.id
-
     category_id = cb.data
+    chat_id = cb.message.chat.id
 
     results = await controller.get_products(
         category_id=category_id
     )
 
+    await shortcut.delete_message(cb.message)
+
     if not results:
-        await cb.message.bot.send_message(
-            chat_id=chat_id,
+        await cb.message.answer(
             text="Bu kategoriyada maxsulot topilmadi"
         )
         return
