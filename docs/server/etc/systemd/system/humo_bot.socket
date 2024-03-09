@@ -1,0 +1,8 @@
+[Unit]
+Description=humo_bot socket
+
+[Socket]
+ListenStream=/run/humo_bot.sock
+
+[Install]
+WantedBy=sockets.target

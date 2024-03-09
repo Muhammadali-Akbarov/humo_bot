@@ -1,0 +1,27 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          password: zZd6vy9jgS88u8
+          script: |
+            cd humo_bot
+            git pull origin main
+            source venv/bin/activate
+            pip3 install -r requirements.txt
+            deactivate
+            systemctl restart humo_bot.service

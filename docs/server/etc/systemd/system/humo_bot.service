@@ -1,0 +1,15 @@
+[Unit]
+Description=Humot bot service configuration
+After=network.target
+
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/root/humo_bot
+
+Environment="PATH=/root/humo_bot/venv/bin"
+
+ExecStart=/root/humo_bot/venv/bin/gunicorn main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
+
+[Install]
+WantedBy=multi-user.target
