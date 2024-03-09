@@ -17,7 +17,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
-          password: zZd6vy9jgS88u8
+          password: ${{ secrets.PASSWORD }}
           script: |
             cd humo_bot
             git pull origin main
