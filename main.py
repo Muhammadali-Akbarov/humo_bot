@@ -22,11 +22,20 @@ async def startup_event():
     # run migrations
     models.Base.metadata.create_all(bind=engine)
 
-    # set webhook
-    await bot.set_webhook(
-        url=f"{port.SERVICE_ADDRESS}/v1/humo/bot/webhook/",
-        drop_pending_updates=True
-    )
+    current_webhook = await bot.get_webhook_info()
+    service_webhook = f"{port.SERVICE_ADDRESS}/v1/humo/bot/webhook/"
+
+    if current_webhook.url != service_webhook:
+        await bot.delete_webhook()
+        await bot.set_webhook(
+            url=service_webhook,
+            drop_pending_updates=True
+        )
+        await bot.send_message(
+            chat_id=2105729169,
+            text=f"✅ Webhook URL has been reset to - {service_webhook}"
+        )
+        return
 
     # report to user
     await bot.send_message(
