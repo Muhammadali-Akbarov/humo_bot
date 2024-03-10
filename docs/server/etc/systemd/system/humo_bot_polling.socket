@@ -1,0 +1,12 @@
+[Install]
+WantedBy=multi-user.target
+
+
+[Unit]
+Description=humo_bot_polling socket
+
+[Socket]
+ListenStream=/run/humo_bot_polling.sock
+
+[Install]
+WantedBy=sockets.target

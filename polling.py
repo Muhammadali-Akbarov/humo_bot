@@ -1,7 +1,10 @@
 """
 entrypoints
 """
+import sys
 import asyncio
+import logging
+
 
 from app.bot.services.external.aiogram import bot
 from app.bot.services.external.aiogram import handler
@@ -18,4 +21,5 @@ async def main() -> None:
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
     asyncio.run(main())

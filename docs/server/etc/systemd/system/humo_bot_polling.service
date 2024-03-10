@@ -1,0 +1,12 @@
+[Install]
+WantedBy=multi-user.target
+
+[Unit]
+Description=Humot bot service configuration
+After=network.target
+
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/root/humo_bot
+ExecStart=/root/humo_bot/venv/bin/python polling.py

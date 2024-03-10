@@ -25,10 +25,9 @@ async def start(message: Message) -> None:
 
     buttons = markup.genmarkup(["🛍 Maxsulotlar"], [1])
 
-    await message.bot.send_photo(
+    await message.bot.send_message(
         chat_id=chat_id,
-        photo=models.entrypoint_image,
-        caption=models.entrypoint_description,
+        text=f"Добро пожаловать - {message.from_user.first_name}!",
         reply_markup=buttons,
         parse_mode="html"
     )
