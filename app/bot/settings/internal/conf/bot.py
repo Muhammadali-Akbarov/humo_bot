@@ -3,6 +3,8 @@ the entry point model
 """
 from app.bot.settings.external.environs import env
 
+IS_WEBHOOK_ENABLED = env.bool("IS_WEBHOOK_ENABLED", False)
+
 # pylint: disable=C0103
 url = env.str("ENTRYPOINT_URL")
 entrypoint_image = env.str("ENTRYPOINT_IMAGE")
