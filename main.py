@@ -9,6 +9,7 @@ from app.bot.settings.internal.conf import port
 from app.bot.services.external.aiogram import bot
 from app.bot.services.external.alchemy import models
 from app.bot.services.external.alchemy import engine
+from app.bot.settings.internal.conf.bot import IS_WEBHOOK_ENABLED
 
 
 app = fastapi.FastAPI()
@@ -22,20 +23,21 @@ async def startup_event():
     # run migrations
     models.Base.metadata.create_all(bind=engine)
 
-    current_webhook = await bot.get_webhook_info()
-    service_webhook = f"{port.SERVICE_ADDRESS}/v1/humo/bot/webhook/"
+    if IS_WEBHOOK_ENABLED:
+        current_webhook = await bot.get_webhook_info()
+        service_webhook = f"{port.SERVICE_ADDRESS}/v1/humo/bot/webhook/"
 
-    if current_webhook.url != service_webhook:
-        await bot.delete_webhook()
-        await bot.set_webhook(
-            url=service_webhook,
-            drop_pending_updates=True
-        )
-        await bot.send_message(
-            chat_id=2105729169,
-            text=f"✅ Webhook URL has been reset to - {service_webhook}"
-        )
-        return
+        if current_webhook.url != service_webhook:
+            await bot.delete_webhook()
+            await bot.set_webhook(
+                url=service_webhook,
+                drop_pending_updates=True
+            )
+            await bot.send_message(
+                chat_id=2105729169,
+                text=f"✅ Webhook URL has been reset to - {service_webhook}"
+            )
+            return
 
     # report to user
     await bot.send_message(
