@@ -3,7 +3,6 @@ init aiogram
 """
 from aiogram import F
 from aiogram.types import Message
-from aiogram.filters import CommandStart
 
 from app.bot import models
 from app.bot.controllers import controller
@@ -12,7 +11,7 @@ from app.bot.services.external.aiogram.button import markup
 from app.bot.services.external.aiogram import dispatcher as dp
 
 
-@dp.message(CommandStart() | (F.text == "🔙 Ortga"))
+@dp.message((F.text == "/start") | (F.text == "🔙 Ortga"))
 async def start(message: Message) -> None:
     """
     handler will forward receive a message back to the sender
