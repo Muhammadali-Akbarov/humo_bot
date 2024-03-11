@@ -9,5 +9,5 @@
 </div>
 </br>
 <p align="center">
-  <img src="./static/image/png/img.png" width="600">
+  <img src="./static/image/png/bot.png" width="600">
 </p>
