@@ -1,7 +1,7 @@
 """
 init sql alchemy client model
 """
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, BigInteger, String
 
 from app.bot import models
 from app.bot.services.external.alchemy import Base
@@ -14,7 +14,7 @@ class Client(Base):
     """
     __tablename__ = 'client'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(BigInteger, primary_key=True)
     username = Column(String)
     first_name = Column(String)
     last_name = Column(String)
